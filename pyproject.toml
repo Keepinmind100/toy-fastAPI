@@ -1,16 +1,27 @@
-[project]
+[tool.poetry]
 name = "toy-fastapi"
 version = "0.1.0"
-description = ""
-authors = [
-    {name = "pjw"}
-]
+description = "toy project by Dominic"
+authors = ["keepinmind <pjwzzang190@naver.com>"]
 readme = "README.md"
-requires-python = ">=3.10c"
-dependencies = [
-]
 
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.6"
+uvicorn = "^0.34.0"
+unicorn = "^2.1.1"
+py-ulid = "^1.0.3"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+pydantic-settings = "^2.7.1"
+mysqlclient = "^2.2.7"
+sqlalchemy = "^2.0.37"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+flake8 = "^7.1.1"
+pytest = "^8.3.4"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
