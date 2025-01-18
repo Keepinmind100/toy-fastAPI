@@ -1,8 +1,10 @@
 from datetime import datetime
 from dependency_injector.wiring import inject
-from fastapi import HTTPException
+from fastapi import HTTPException , status
 from ulid import ULID
 
+
+from common.auth import Role, create_access_token
 from user.domain.user import User
 from user.domain.repository.user_repo import IUserRepository
 from utils.crypto import Crypto
@@ -35,7 +37,7 @@ class UserService:
                 raise e
 
         if _user:
-            raise HTTPException(status_code=422)
+            raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
         now = datetime.now()
         user: User = User(
@@ -79,3 +81,25 @@ class UserService:
 
     def get_total_users(self) -> list[User]:
         return self.user_repo.get_total_users()
+    
+    def login(self, email: str, password: str):
+        user = self.user_repo.find_by_email(email)
+
+        if not self.crypto.verify(password, user.password):
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+        
+        # db에서 올래 가져오고나 하는게 좋을듯..
+        user_role = "USER"
+        
+        if user.id == "pjwzzang@example.com":
+            user_role = "ADMIN"
+
+        access_token = create_access_token(
+            user_id=user.id,
+            payload={"user_id": user.id},
+            role=Role(user_role),
+        )
+
+        print(access_token)
+
+        return access_token
