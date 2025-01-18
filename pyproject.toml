@@ -19,6 +19,8 @@ alembic = "^1.14.0"
 bcrypt = "3.2.2"
 dependency-injector = "^4.45.0"
 pydantic = {extras = ["email"], version = "^2.10.5"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+python-multipart = "^0.0.20"
 
 
 [tool.poetry.group.dev.dependencies]
