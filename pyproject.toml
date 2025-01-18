@@ -11,10 +11,14 @@ fastapi = "^0.115.6"
 uvicorn = "^0.34.0"
 unicorn = "^2.1.1"
 py-ulid = "^1.0.3"
-passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+passlib = "1.7.4"
 pydantic-settings = "^2.7.1"
 mysqlclient = "^2.2.7"
 sqlalchemy = "^2.0.37"
+alembic = "^1.14.0"
+bcrypt = "3.2.2"
+dependency-injector = "^4.45.0"
+pydantic = {extras = ["email"], version = "^2.10.5"}
 
 
 [tool.poetry.group.dev.dependencies]
